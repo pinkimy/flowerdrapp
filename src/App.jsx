@@ -5,16 +5,12 @@ import ProductCard from "./ProductCard";
 export default function App() {
   return (
     <BrowserRouter>
-      <header>
-        <div className="linkshop">
-          <Link to="/">🌷 Shop</Link>
-          <span>|</span>
-          <Link to="/cart">🛒 Shopping Cart</Link>
+      <header className="site-header">
+        <div className="left">
+          <Link to="/"> Flower Delivery Shop 🌷</Link>
         </div>
-        <div className="sort">
-          <a>Sort by price ⬇️</a>
-          <span>|</span>
-          <a>Sort by date 📅</a>
+        <div className="right">
+          <Link to="/cart"> Shopping Cart 🛒</Link>
         </div>
       </header>
       <Routes>
