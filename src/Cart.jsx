@@ -6,35 +6,51 @@ export default function Cart({ cart }) {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
 
+  const [cartItems, setCartItems] = useState(
+    cart.map((item) => ({ ...item, quantity: 1 }))
+  );
+
+  const increaseQuantity = (index) => {
+    const newCart = [...cartItems];
+    newCart[index].quantity++;
+    setCartItems(newCart);
+  };
+
+  const decreaseQuantity = (index) => {
+    const newCart = [...cartItems];
+    if (newCart[index].quantity > 1) newCart[index].quantity--;
+    setCartItems(newCart);
+  };
+
   const handleSubmit = async () => {
-    if (!name || !email || !phone || !address || cart.length === 0) {
+    if (!name || !email || !phone || !address || cartItems.length === 0) {
       alert("Заполните все поля и добавьте товары в корзину!");
       return;
     }
 
     try {
-      const response = await fetch("http://localhost:3000/orders", {
+      const payload = {
+        name,
+        email,
+        phone,
+        address,
+        cart: cartItems.map((item) => ({
+          productId: item.id,
+          quantity: item.quantity,
+        })),
+      };
+
+      const res = await fetch("http://localhost:3000/orders", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name,
-          email,
-          phone,
-          address,
-          cart: cart.map((item) => ({
-            productId: item.id,
-            quantity: 1,
-          })),
-        }),
+        body: JSON.stringify(payload),
       });
 
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || "Ошибка сервера");
-      }
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Ошибка сервера");
 
       alert("Заказ успешно отправлен!");
+      setCartItems([]);
     } catch (err) {
       console.error(err);
       alert("Ошибка при отправке заказа");
@@ -42,72 +58,55 @@ export default function Cart({ cart }) {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <main className="container mx-auto p-6 space-y-8">
-        {/* User */}
-        <div className="bg-white p-6 rounded-lg shadow-md space-y-6">
-          <h2 className="text-2xl font-semibold">Your Details</h2>
-          <div className="flex flex-col">
-            <label className="mb-2 text-gray-700">Name:</label>
-            <input
-              type="text"
-              placeholder="Name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="border border-gray-300 rounded px-3 py-2"
-            />
-          </div>
-          <div className="flex flex-col">
-            <label className="mb-2 text-gray-700">Email:</label>
-            <input
-              type="email"
-              placeholder="Email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="border border-gray-300 rounded px-3 py-2"
-            />
-          </div>
-          <div className="flex flex-col">
-            <label className="mb-2 text-gray-700">Phone:</label>
-            <input
-              type="text"
-              placeholder="Phone"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              className="border border-gray-300 rounded px-3 py-2"
-            />
-          </div>
-          <div className="flex flex-col">
-            <label className="mb-2 text-gray-700">Address:</label>
-            <input
-              type="text"
-              placeholder="Address"
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-              className="border border-gray-300 rounded px-3 py-2"
-            />
-          </div>
-        </div>
+    <div className="cart-page">
+      <div className="user-info">
+        <h2>Your Details</h2>
+        <input
+          type="text"
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <input
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Phone"
+          value={phone}
+          onChange={(e) => setPhone(e.target.value)}
+        />
+        <input
+          type="text"
+          placeholder="Address"
+          value={address}
+          onChange={(e) => setAddress(e.target.value)}
+        />
+      </div>
 
-        {/* Cart */}
-        <div className="bg-white p-6 rounded-lg shadow-md space-y-6">
-          <h3 className="text-xl font-semibold">Cart items:</h3>
-          <ul>
-            {cart.map((item, index) => (
-              <li key={index}>
+      <div className="cart-items">
+        <h3>Cart items:</h3>
+        <ul>
+          {cartItems.map((item, index) => (
+            <li key={item.id} className="cart-item">
+              <span>
                 {item.name} — ${item.price.toFixed(2)}
-              </li>
-            ))}
-          </ul>
-
-          <button
-            onClick={handleSubmit}
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-          >
-            Submit Order
-          </button>
-        </div>
-      </main>
+              </span>
+              <div className="quantity-controls">
+                <button onClick={() => decreaseQuantity(index)}>-</button>
+                <span>{item.quantity}</span>
+                <button onClick={() => increaseQuantity(index)}>+</button>
+              </div>
+            </li>
+          ))}
+        </ul>
+        <button onClick={handleSubmit} className="submit-order">
+          Submit Order
+        </button>
+      </div>
     </div>
   );
 }
