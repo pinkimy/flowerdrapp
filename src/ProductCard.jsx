@@ -1,6 +1,6 @@
 import useFetch from "./hooks/useFetch.js";
 
-export default function ProductCard() {
+export default function ProductCard({ cart, setCart }) {
   const data = useFetch("http://localhost:3000/products");
 
   if (!data) return <div>Загрузка...</div>;
@@ -16,7 +16,9 @@ export default function ProductCard() {
           />
           <h5>{product.name}</h5>
           <p>${product.price.toFixed(2)}</p>
-          <button>Add to Cart</button>
+          <button onClick={() => setCart([...cart, product])}>
+            Add to Cart
+          </button>
         </div>
       ))}
     </div>

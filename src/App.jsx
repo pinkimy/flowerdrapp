@@ -1,8 +1,12 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { useState } from "react";
 import Cart from "./Cart";
 import ProductCard from "./ProductCard";
+import ButtonShops from "./ButtonsShops";
 
 export default function App() {
+  const [cart, setCart] = useState([]);
+
   return (
     <BrowserRouter>
       <header className="site-header">
@@ -10,29 +14,28 @@ export default function App() {
           <Link to="/"> Flower Delivery Shop 🌷</Link>
         </div>
         <div className="right">
-          <Link to="/cart"> Shopping Cart 🛒</Link>
+          <Link to="/cart">
+            {" "}
+            Shopping Cart 🛒{" "}
+            {cart.length > 0 && <a className="cart">{cart.length}</a>}
+          </Link>
         </div>
       </header>
+
       <Routes>
+        {/* Main with Products */}
         <Route
           path="/"
           element={
-            <>
-              <div className="container">
-                <div className="sidebar">
-                  <h4>Shops:</h4>
-                  <button className="buttonshops">Flower Shop 1</button>
-                  <button className="buttonshops">Flower Shop 2</button>
-                  <button className="buttonshops">Flower Shop 3</button>
-                  <button className="buttonshops">Flower Shop 4</button>
-                  <button className="buttonshops">Flower Shop 5</button>
-                </div>
-                <ProductCard />
-              </div>
-            </>
+            <div className="container">
+              <ButtonShops />
+              <ProductCard cart={cart} setCart={setCart} />
+            </div>
           }
         />
-        <Route path="/cart" element={<Cart />} />
+
+        {/* Cart */}
+        <Route path="/cart" element={<Cart cart={cart} />} />
       </Routes>
     </BrowserRouter>
   );
