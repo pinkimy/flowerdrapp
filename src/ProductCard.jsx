@@ -10,7 +10,7 @@ export default function ProductCard({ cart, setCart }) {
       {data.products.map((product) => (
         <div className="product-card" key={product.id}>
           <img
-            src={`src/assets${product.path}`}
+            src={`src/assets/${product.path}`}
             width="100px"
             alt={product.name}
           />
