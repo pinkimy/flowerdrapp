@@ -9,17 +9,12 @@ export default function App() {
 
   return (
     <BrowserRouter>
-      <header className="site-header">
-        <div className="left">
-          <Link to="/"> Flower Delivery Shop 🌷</Link>
-        </div>
-        <div className="right">
-          <Link to="/cart">
-            {" "}
-            Shopping Cart 🛒{" "}
-            {cart.length > 0 && <a className="cart">{cart.length}</a>}
+      <header className="header">
+          <Link to="/" className="text"> Flower Shop 🌷</Link>
+          <Link to="/cart" className="cart-icon">
+            <span>🛒</span>
+            {cart.length > 0 && <span className="cart-badge">{cart.length}</span>}
           </Link>
-        </div>
       </header>
 
       <Routes>

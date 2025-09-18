@@ -1,34 +1,32 @@
 @import "tailwindcss";
-.site-header {
+
+/* Header main page */
+.header {
+  background: linear-gradient(to right, #0095ff, #01e8fd);
+  padding: 20px 40px;
+  color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 10px 20px;
-  background-color: #4CAF50;
-  color: #fff;
-  border-bottom: 1px solid #099f24;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
-  z-index: 100;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  z-index: 1000;
 }
 
-.site-header a {
-  color: white;
-  text-decoration: none;
-  font-weight: 600;
-  padding: 6px 8px;
+.header .text {
+  font-size: 1.5 rem;
+  font-weight: 700;
+  color: rgb(255, 255, 255);
+  text-shadow:
+    -1px -1px 0 #6fb1a0,
+     1px -1px 0 #6fb1a0,
+    -1px  1px 0 #6fb1a0,
+     1px  1px 0 #6fb1a0;
+  letter-spacing: 2px;
 }
 
-.site-header .left,
-.site-header .right {
-  display: flex;
-  align-items: center;
-}
-
-.site-header .left { gap: 12px; }
-.site-header .right { gap: 12px; }
-
+/* Container */
 .container {
     display: flex;
     align-items: flex-start;
@@ -36,6 +34,7 @@
     padding: 20px;
 }
 
+/* Side bar */
 .sidebar {
     flex: 0 0 200px;
     display: flex;
@@ -45,7 +44,9 @@
     border-radius: 8px;
 }
 
+/* Buttons */
 .buttonshops {
+    background: linear-gradient(to right, #349506, #39b496);
     background-color: #4CAF50;
     border: none;
     color: white;
@@ -57,10 +58,8 @@
     border-radius: 12px;
     transition: background-color 0.3s;
 }
-.buttonshops:hover {
-    background-color: #45a049;
-}
 
+/* Product moment */
 .products {
     flex: 1;
     display: grid;
@@ -73,7 +72,7 @@
 }
 
 .product-card {
-    background-color: white;
+    background-color: rgb(248, 248, 248);
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 10px;
@@ -95,44 +94,78 @@
     background-color: #45a049;
 }
 
-.cartitems {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-    padding: 20px;
-    background-color: #f0f0f0;
-    min-height: 80vh;
-    box-sizing: border-box;
-    margin: 20px auto;
-    max-width: 1200px;
+/* Cart */
+.cart{
+  border-radius: 100%;
+  background-color: #e91e63;
+  color: white;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s ease;
 }
 
-.fieldinput {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 14px;
-    color: #333;
-    font-weight: 500;
-    cursor: pointer;
-    user-select: none;
-    padding: 5px 10px;
-    border-radius: 5px;
-    background-color: #f0f0f0;
-    transition: background-color 0.3s;
-}
-.cart{
-  width: 50px;
-  height: 50px;
-  background-color: red;
-  border-radius: 50%;
-}
+/* Cart page fone */
 .cart-page {
   min-height: 100vh;
   background-color: #f9fafb;
   padding: 2rem;
 }
 
+.cart-icon {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border: 2px solid #0011ff;
+  border-radius: 50%;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  color: #ff69b4;
+  font-size: 24px;
+  cursor: pointer;
+  transition: all .3s ease;
+  overflow: visible;
+}
+
+/* cart icon if cursor moved */
+.cart-icon:hover {
+  background-color: #fbe1ff;
+  color: #fff;
+  transform: scale(1.1);
+}
+
+.cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: #e91e63;
+  color: #fff;
+  font-size: 12px;
+  line-height: 1;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  box-sizing: border-box;
+  white-space: nowrap;
+}
+
+/* Plus and minus */
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+/* User */
 .user-info, .cart-items {
   background: white;
   padding: 1.5rem;
@@ -152,13 +185,6 @@
   padding: 0.5rem;
   border: 1px solid #d1d5db;
   border-radius: 0.25rem;
-}
-
-.cart-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 0.5rem;
 }
 
 .quantity-controls button {
