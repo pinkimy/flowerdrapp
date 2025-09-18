@@ -6,6 +6,7 @@ export default function ProductCard({ cart, setCart }) {
   if (!data) return <div>Загрузка...</div>;
 
   return (
+    <span> Products:
     <div className="products">
       {data.products.map((product) => (
         <div className="product-card" key={product.id}>
@@ -22,5 +23,6 @@ export default function ProductCard({ cart, setCart }) {
         </div>
       ))}
     </div>
+    </span>
   );
 }

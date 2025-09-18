@@ -1,14 +1,13 @@
 export default function ButtonShops() {
+  const shop_list = ['Shop 1', "Shop 2", "Shop 3", "etc."]
   return (
     <>
       {" "}
       <div className="sidebar">
         <h4>Shops:</h4>
-        <button className="buttonshops">Flower Shop 1</button>
-        <button className="buttonshops">Flower Shop 2</button>
-        <button className="buttonshops">Flower Shop 3</button>
-        <button className="buttonshops">Flower Shop 4</button>
-        <button className="buttonshops">Flower Shop 5</button>
+        {shop_list.map((i) => (
+          <button className="buttonshops"> {i} </button>
+        ))}
       </div>
     </>
   );

@@ -18,84 +18,107 @@
   font-size: 1.5 rem;
   font-weight: 700;
   color: rgb(255, 255, 255);
-  text-shadow:
-    -1px -1px 0 #6fb1a0,
-     1px -1px 0 #6fb1a0,
-    -1px  1px 0 #6fb1a0,
-     1px  1px 0 #6fb1a0;
+  text-shadow: -1px -1px 0 #6fb1a0, 1px -1px 0 #6fb1a0, -1px 1px 0 #6fb1a0,
+    1px 1px 0 #6fb1a0;
   letter-spacing: 2px;
 }
 
 /* Container */
 .container {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
-    padding: 20px;
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  padding: 20px;
 }
 
 /* Side bar */
 .sidebar {
-    flex: 0 0 200px;
-    display: flex;
-    flex-direction: column;
-    background-color: #f0f0f0;
-    padding: 10px;
-    border-radius: 8px;
+  flex: 0 0 200px;
+  display: flex;
+  flex-direction: column;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-radius: 8px;
 }
 
 /* Buttons */
 .buttonshops {
-    background: linear-gradient(to right, #349506, #39b496);
-    background-color: #4CAF50;
-    border: none;
-    color: white;
-    padding: 10px 24px;
-    text-align: left;
-    font-size: 16px;
-    margin: 4px 0;
-    cursor: pointer;
-    border-radius: 12px;
-    transition: background-color 0.3s;
+  background: linear-gradient(to right, #0066af, #3301fd);
+  border: none;
+  color: white;
+  padding: 10px 24px;
+  text-align: left;
+  font-size: 16px;
+  margin: 4px 0;
+  cursor: pointer;
+  border-radius: 12px;
+  transition: background-color 0.3s;
 }
 
 /* Product moment */
 .products {
-    flex: 1;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    min-height: 80vh;
-    box-sizing: border-box;
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--gap);
+  padding: 20px;
+  background-color: var(--bg-page);
+  min-height: 80vh;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .product-card {
-    background-color: rgb(248, 248, 248);
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    padding: 10px;
-    text-align: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  background-color: linear-gradient(#fff, #fff);
+  background-color: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius);
+  padding: 12px;
+  text-align: center;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform .20s cubic-bezier(.2,.9,.3,1), box-shadow .20s ease, border-color .20s ease;
+  overflow: hidden;
+  min-height: 300px;
 }
+
+.product-card:hover{
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgba(16,24,40,0.10);
+  border-color: rgba(107,139,255,0.12);
+}
+
 .product-card img {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
+  max-width: 100%;
+  height: 170px;
+  object-fit: contain;
+  border-radius: 8px;
+  transition: transform .28s ease;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
+
 .product-card button {
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 6px;
-    cursor: pointer;
+  background-color: #0095ff;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
 }
+
 .product-card button:hover {
-    background-color: #45a049;
+  background-color: #0026ff;
 }
 
 /* Cart */
-.cart{
+.cart {
   border-radius: 100%;
   background-color: #e91e63;
   color: white;
@@ -122,11 +145,11 @@
   border: 2px solid #0011ff;
   border-radius: 50%;
   background-color: #fff;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   color: #ff69b4;
   font-size: 24px;
   cursor: pointer;
-  transition: all .3s ease;
+  transition: all 0.3s ease;
   overflow: visible;
 }
 
@@ -152,7 +175,7 @@
   color: #fff;
   font-size: 12px;
   line-height: 1;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
   white-space: nowrap;
 }
@@ -166,15 +189,17 @@
 }
 
 /* User */
-.user-info, .cart-items {
+.user-info,
+.cart-items {
   background: white;
   padding: 1.5rem;
   border-radius: 0.5rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   margin-bottom: 1.5rem;
 }
 
-.user-info h2, .cart-items h3 {
+.user-info h2,
+.cart-items h3 {
   margin-bottom: 1rem;
 }
 
