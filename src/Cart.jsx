@@ -1,4 +1,7 @@
 import { useState } from "react";
+import.meta.env;
+
+const link = import.meta.env.VITE_LINK;
 
 export default function Cart({ cart }) {
   const [name, setName] = useState("");
@@ -40,7 +43,7 @@ export default function Cart({ cart }) {
         })),
       };
 
-      const res = await fetch("http://localhost:3000/orders", {
+      const res = await fetch(`${link}/orders`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
