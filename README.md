@@ -43,6 +43,7 @@ project/
 │   index.css
 │   main.jsx
 │
+├── .env
 ├── .gitignore
 ├── README.MD
 ├── eslint.config.js
